@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERYN · Illustration & Character Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- GLOBAL STYLES --- */
+        :root {
+            --bg-color: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-color: #111;
+            --border-color: #000;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 900px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 80vh;
+            position: relative;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        h3 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* --- SOCIAL ICONS & TOOLTIPS --- */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-icons a, .social-icons .comic-icon {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: transform 0.2s, opacity 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .social-icons a:hover, .social-icons .comic-icon:hover {
+            transform: translateY(-3px);
+            opacity: 0.7;
+        }
+
+        .icon-svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        /* Hover Tooltip Text */
+        .tooltip-text {
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.7rem;
+            color: #888;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+            font-family: var(--font-sans);
+            text-transform: capitalize;
+        }
+
+        .social-icons a:hover .tooltip-text,
+        .social-icons .comic-icon:hover .tooltip-text {
+            opacity: 1;
+        }
+
+        /* Specific styling for the Comic Bunny Icon */
+        .comic-icon {
+            cursor: pointer;
+        }
+        
+        .comic-icon svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        /* --- BUTTONS --- */
+        .main-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            font-size: 1.1rem;
+            font-family: var(--font-serif);
+            transition: background 0.3s, color 0.3s;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background-color: var(--border-color);
+            color: #fff;
+        }
+
+        /* --- GALLERY GENERAL --- */
+        .gallery-section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 10px;
+        }
+
+        /* Featured Slideshow */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            background: #f9f9f9;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+            max-height: 600px;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fade 1.5s ease-in-out;
+        }
+
+        @keyframes fade {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+
+        /* Video Sized Containers (for bust, half, full) */
+        .video-container {
+            position: relative;
+            width: 100%;
+            margin-bottom: 20px;
+            background: #eee;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .video-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        /* Standard Grid — natural sizes, no forced height */
+        .grid-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+
+        .grid-gallery img {
+            width: 100%;
+            height: auto;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: transform 0.2s;
+            display: block;
+        }
+
+        .grid-gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        /* --- NSFW / GORE SECTION --- */
+        .nsfw-gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .nsfw-gallery img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s, filter 0.3s;
+            filter: blur(10px);
+        }
+
+        .nsfw-gallery img.unblurred {
+            filter: blur(0px);
+        }
+
+        .nsfw-gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        /* --- LIGHTBOX (ZOOM) --- */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 95%;
+            max-height: 80vh;
+            object-fit: contain;
+            border: 2px solid #fff;
+        }
+
+        .lightbox-close {
+            margin-top: 20px;
+            padding: 10px 30px;
+            background: #fff;
+            color: #000;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lightbox-close:hover {
+            background: #ccc;
+        }
+
+        /* --- COMMISSION PAGE --- */
+        .commission-text {
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .commission-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .commission-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .commission-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-family: var(--font-serif);
+        }
+
+        .form-group select, 
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Small, italic notes */
+        .small-italic {
+            font-size: 0.8rem;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* Price Calculator Box — REMOVED, not shown on site */
+        /* Hide the old estimator if any remains */
+        .price-estimator {
+            display: none;
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: var(--font-sans);
+        }
+
+        .back-btn:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Hide pages by default */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        .divider {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 30px 0;
+        }
+
+        /* Custom checkbox row */
+        .checkbox-row {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .checkbox-row label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-row input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+            margin: 0;
+        }
+
+        /* File input */
+        input[type="file"] {
+            padding: 8px;
+            background: #f9f9f9;
+        }
+
+        /* --- VISITOR COUNTER --- */
+        #visitor-counter {
+            position: fixed;
+            bottom: 15px;
+            right: 20px;
+            font-size: 0.7rem;
+            color: #888;
+            font-family: var(--font-sans);
+            z-index: 9999;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 4px 8px;
+            border-radius: 4px;
+            pointer-events: none;
+        }
+
+        /* remove request form outside container — already handled by structure */
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <div id="home" class="page active">
+        <h1>ERYN</h1>
+        <p class="subtitle">Illustrations, Character art,<br>and Cinematic worlds by Eryn.</p>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <!-- Twitter/X -->
+            <a href="https://x.com/eryndor_0" target="_blank" title="Twitter">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                <span class="tooltip-text">Twitter</span>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@eryndor__0" target="_blank" title="TikTok">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+                <span class="tooltip-text">TikTok</span>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/eryndor_01" target="_blank" title="Instagram">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                <span class="tooltip-text">Instagram</span>
+            </a>
+            <!-- Patreon -->
+            <a href="https://www.patreon.com/Eryndor_01" target="_blank" title="Patreon">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M15.386 3.252c-4.356 0-7.892 3.536-7.892 7.892 0 4.356 3.536 7.892 7.892 7.892 4.356 0 7.892-3.536 7.892-7.892 0-4.356-3.536-7.892-7.892-7.892zm-10.55.748v16h3v-16h-3z"/></svg>
+                <span class="tooltip-text">Patreon</span>
+            </a>
+            <!-- ArtStation -->
+            <a href="https://jannapaypal6.artstation.com/" target="_blank" title="ArtStation">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 18.5l2.5-4.3h5.1L7 18.5H2zM21.5 18.5h-6.8l-3.4-5.9 3.4-5.9h6.8l-3.4 5.9 3.4 5.9zM12.5 2L2 20h4.5l6.5-11.2L19.5 20H24L12.5 2z"/></svg>
+                <span class="tooltip-text">ArtStation</span>
+            </a>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/1behpyvBWH/" target="_blank" title="Facebook">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                <span class="tooltip-text">Facebook</span>
+            </a>
+            <!-- Pixiv -->
+            <a href="https://www.pixiv.net/users/87870114" target="_blank" title="Pixiv">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <span class="tooltip-text">Pixiv</span>
+            </a>
+            <!-- Tumblr -->
+            <a href="https://www.tumblr.com/eryndor00" target="_blank" title="Tumblr">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14.5 2v3.5h3.5v4h-3.5v5.5c0 1.5.5 2 2 2h1.5v4h-3.5c-4 0-6-2-6-6V9.5H5.5v-4H8V2h6.5z"/></svg>
+                <span class="tooltip-text">Tumblr</span>
+            </a>
+            <!-- YouTube -->
+            <a href="https://youtube.com/@eryndor_0" target="_blank" title="YouTube">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <span class="tooltip-text">YouTube</span>
+            </a>
+            <!-- Email -->
+            <a href="mailto:eryndorcontact@gmail.com" title="Email">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                <span class="tooltip-text">Email</span>
+            </a>
+            
+            <!-- NEW: Discord -->
+            <a href="https://discord.gg/2RUWZsrHY" target="_blank" title="Discord">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20.317 4.37a19.79 19.79 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028 14.09 14.09 0 001.226-1.994.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                <span class="tooltip-text">Discord</span>
+            </a>
+            
+            <!-- NEW: ACG Goods -->
+            <a href="https://erynshop.acggoods.com/?from=my-center" target="_blank" title="ACG Goods">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                <span class="tooltip-text">ACG Goods</span>
+            </a>
+
+            <!-- NEW: Beastars Next Generation Comic -->
+            <div class="comic-icon" title="Beastars Next Generation" onclick="alert('Coming Soon!')">
+                <svg viewBox="0 0 24 24">
+                    <!-- Silhouette of a bunny head (simplified) -->
+                    <path d="M12 4c-2.5 0-4.5 1.5-5.5 3.5-.5 1-.5 2.5-.5 3.5 0 2 1 3.5 2.5 4.5.5.3 1 .5 1.5.5.5 0 1-.2 1.5-.5 1.5-1 2.5-2.5 2.5-4.5 0-1 0-2.5-.5-3.5C14.5 5.5 12.5 4 12 4z"/>
+                    <path d="M7 10c-1.5.5-2.5 2-2.5 4 0 2.5 1.5 4.5 4 5.5.5.2 1 .3 1.5.3.5 0 1-.1 1.5-.3 2.5-1 4-3 4-5.5 0-2-1-3.5-2.5-4-.5-.2-1-.3-1.5-.3-.5 0-1 .1-1.5.3z"/>
+                    <circle cx="9" cy="12" r="1" fill="white"/>
+                    <circle cx="15" cy="12" r="1" fill="white"/>
+                </svg>
+                <span class="tooltip-text">Beastars Next Generation</span>
+            </div>
+
+        </div>
+
+        <div class="main-buttons">
+            <a href="#" class="btn" onclick="showPage('gallery')">Gallery</a>
+            <a href="#" class="btn" onclick="showPage('commissions')">Commission</a>
+            <a href="mailto:eryndorcontact@gmail.com" class="btn">Email</a>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 2: GALLERY ================= -->
+    <div id="gallery" class="page">
+        <h2>Gallery</h2>
+        <p class="subtitle">Selected character art, illustrations, and concept work.</p>
+
+        <!-- 1. FEATURED SLIDESHOW -->
+        <div class="gallery-section">
+            <div class="section-title">Featured Works</div>
+            <div class="slideshow-container" onclick="openLightbox(this.querySelector('.slide.active img').src)">
+                <div class="slide active">
+                    <img src="https://i.imgur.com/3b68EGu.jpeg" alt="Featured 1">
+                </div>
+                <div class="slide">
+                    <img src="https://i.imgur.com/sjcJv3W.jpeg" alt="Featured 2">
+                </div>
+                <div class="slide">
+                    <img src="https://i.imgur.com/pchKrSG.jpeg" alt="Featured 3">
+                </div>
+                <div class="slide">
+                    <img src="https://i.imgur.com/4FVTOJG.jpeg" alt="Featured 4">
+                </div>
+                <div class="slide">
+                    <img src="https://i.imgur.com/jCmtWGt.jpeg" alt="Featured 5">
+                </div>
+            </div>
+        </div>
+
+        <hr class="divider">
+        
+        <!-- 2. BUST CONTAINER -->
+        <div class="gallery-section">
+            <div class="section-title">Bust</div>
+            <div class="video-container" onclick="openLightbox('https://i.imgur.com/ieCQ1aU.jpeg')">
+                <img src="https://i.imgur.com/ieCQ1aU.jpeg" alt="Bust Showcase">
+            </div>
+        </div>
+
+        <!-- 3. HALF BODY CONTAINER -->
+        <div class="gallery-section">
+            <div class="section-title">Half Body</div>
+            <div class="video-container" onclick="openLightbox('https://i.imgur.com/ckBfinZ.jpeg')">
+                <img src="https://i.imgur.com/ckBfinZ.jpeg" alt="Half Body Showcase">
+            </div>
+        </div>
+
+        <!-- 4. FULL BODY CONTAINER -->
+        <div class="gallery-section">
+            <div class="section-title">Full Body</div>
+            <div class="video-container" onclick="openLightbox('https://i.imgur.com/1t6d0Vp.jpeg')">
+                <img src="https://i.imgur.com/1t6d0Vp.jpeg" alt="Full Body Showcase">
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 5. REST OF 15 IMAGES GRID — natural sizes -->
+        <div class="gallery-section">
+            <div class="section-title">More Art</div>
+            <div class="grid-gallery">
+                <img src="https://i.imgur.com/Yjajqr4.jpeg" alt="Art 1" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/txwazrh.jpeg" alt="Art 2" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/qeKhkiQ.jpeg" alt="Art 3" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/1cYShvb.jpeg" alt="Art 4" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/qxLsF1Z.jpeg" alt="Art 5" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/XZgUREK.jpeg" alt="Art 6" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/dVTqMBk.jpeg" alt="Art 7" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/nvChG1p.jpeg" alt="Art 8" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/DGWFFMd.jpeg" alt="Art 9" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/a0KUP6J.jpeg" alt="Art 10" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/JOKHwaO.jpeg" alt="Art 11" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/4Jguddb.jpeg" alt="Art 12" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/Qm9kt0u.jpeg" alt="Art 13" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/HJAscJ3.jpeg" alt="Art 14" onclick="openLightbox(this.src)">
+                <img src="https://i.imgur.com/rXRWRIW.jpeg" alt="Art 15" onclick="openLightbox(this.src)">
+            </div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- 6. NSFW / GORE / THEMES SECTION — blurred, click to unblur, then click again to enlarge -->
+        <div class="gallery-section">
+            <div class="section-title">NSFW / Gore / Themes</div>
+            <div class="nsfw-gallery">
+                <img src="https://i.imgur.com/apOlXA9.jpeg" alt="NSFW 1" class="nsfw-img" onclick="handleNsfwClick(this, event)">
+                <img src="https://i.imgur.com/zQqoV9e.jpeg" alt="NSFW 2" class="nsfw-img" onclick="handleNsfwClick(this, event)">
+                <img src="https://i.imgur.com/cwraQ4D.jpeg" alt="NSFW 3" class="nsfw-img" onclick="handleNsfwClick(this, event)">
+                <img src="https://i.imgur.com/BlgWaeM.jpeg" alt="NSFW 4" class="nsfw-img" onclick="handleNsfwClick(this, event)">
+            </div>
+            <p class="small-italic" style="margin-top: 8px; text-align: center;">Click to reveal, click again to enlarge.</p>
+        </div>
+
+        <br>
+        <button class="back-btn" onclick="showPage('home')">&larr; Back to Home</button>
+    </div>
+
+    <!-- ================= PAGE 3: COMMISSIONS ================= -->
+    <div id="commissions" class="page">
+        <h2>Commissions</h2>
+        
+        <div class="commission-text">
+            <p>Painterly anime and furry character art, illustration, and project-based artwork. Commissions start at <strong>$75 USD</strong>.</p>
+            <p>Pricing can be sensitive to complexity, character count, background detail, usage, and deadline.</p>
+            
+            <br>
+            <p><strong>What I Offer</strong></p>
+            <ul class="commission-list">
+                <li>Character art</li>
+                <li>Portraits / busts</li>
+                <li>Full-body illustrations</li>
+                <li>Character sheets</li>
+                <li>Promotional or project artwork</li>
+                <li>Dark, surreal, emotional, or cinematic focused pieces</li>
+            </ul>
+
+            <br>
+            <p><strong>Pricing</strong></p>
+            <p>Base price: from $75 USD</p>
+            <p>Larger or more complex work is quoted individually.</p>
+            <p>Commercial use, multiple characters, detailed backgrounds, tight deadlines, or complex designs may increase the price.</p>
+            
+            <br>
+            <p><strong>Process</strong></p>
+            <ol style="padding-left: 20px; margin-bottom: 20px;">
+                <li>Send a request through the form.</li>
+                <li>I review the idea and give a quote.</li>
+                <li>50% Payment is confirmed.</li>
+                <li>I send progress/sketch updates.</li>
+                <li>A Preview of final work is sent.</li>
+                <li>Other 50% Payment is confirmed.</li>
+                <li>Final artwork is delivered as a high-resolution file.</li>
+            </ol>
+
+            <br>
+            <p><strong>Terms Summary</strong></p>
+            <ul class="commission-list">
+                <li>Before requesting, please include clear references, intended usage, budget range, and any deadline.</li>
+                <li>I may decline requests that do not fit my work or comfort zone.</li>
+                <li>Clear references are required.</li>
+                <li>Commercial use must be discussed upfront.</li>
+                <li>Major revisions after final approval may cost extra.</li>
+                <li>Final artwork may be posted in my portfolio unless privacy is requested.</li>
+                <li>I retain commercial rights unless privately discussed.</li>
+                <li>Timelapse of Artwork needs to be requested prior.</li>
+                <li>If work is urgent and No contact has been made after Request, an Email attempt is recommended.</li>
+            </ul>
+        </div>
+
+        <!-- THE COMMISSION FORM -->
+        <form action="https://formsubmit.co/eryndorcontact@gmail.com" method="POST" id="commissionForm" enctype="multipart/form-data">
+            <input type="hidden" name="_subject" value="New Commission Request from Website!">
+            <input type="hidden" name="_captcha" value="false">
+            <!-- Hidden field for calculated total (not displayed) -->
+            <input type="hidden" name="Calculated Total Price" id="hiddenTotalPrice" value="0">
+
+            <h3 style="margin-bottom: 15px;">Commission Request Form</h3>
+
+            <!-- BASE TYPE -->
+            <div class="form-group">
+                <label>Base Type</label>
+                <select name="Base Type" id="baseType" required onchange="updateHiddenTotal()">
+                    <option value="Bust Up" data-price="75">Bust Up - $75</option>
+                    <option value="Half Body" data-price="85">Half Body - $85</option>
+                    <option value="Full Body" data-price="100">Full Body - $100</option>
+                </select>
+            </div>
+
+            <!-- STYLE — now three options -->
+            <div class="form-group">
+                <label>Style</label>
+                <select name="Style" required>
+                    <option value="Anime">Anime</option>
+                    <option value="Furry">Furry</option>
+                    <option value="Manga">Manga</option>
+                </select>
+            </div>
+
+            <!-- FINISH -->
+            <div class="form-group">
+                <label>Finish</label>
+                <select name="Finish" id="finishType" required onchange="updateHiddenTotal()">
+                    <option value="Manga Color" data-price="1.0">Manga Color (Standard Price)</option>
+                    <option value="Flat Color" data-price="1.2">Flat Color (+20%)</option>
+                    <option value="Rendered" data-price="1.5">Rendered (+40%)</option>
+                </select>
+            </div>
+
+            <!-- BACKGROUND -->
+            <div class="form-group">
+                <label>Background</label>
+                <select name="Background" id="bgType" required onchange="updateHiddenTotal()">
+                    <option value="None" data-price="0">No Background (+$0)</option>
+                    <option value="Simple" data-price="10">Simple Background (+10%)</option>
+                    <option value="Complex" data-price="50">Complex Background (+50%)</option>
+                </select>
+            </div>
+
+            <!-- ADD-ONS / THEMES -->
+            <div class="form-group">
+                <label>Add-ons & Themes (Select all that apply)</label>
+                <div class="checkbox-row">
+                    <label>
+                        <input type="checkbox" name="Addons" value="Extra Character (+50%)" id="addChar" onchange="updateHiddenTotal()"> 
+                        Extra Character (+50%)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Addons" value="Gore (+50%)" id="addGore" onchange="updateHiddenTotal()"> 
+                        Gore (+50%)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Addons" value="NSFW (+50%)" id="addNsfw" onchange="updateHiddenTotal()"> 
+                        NSFW (+50%)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Addons" value="Commercial Use (+50%)" id="addCommercial" onchange="updateHiddenTotal()"> 
+                        Commercial Use (+50%)
+                    </label>
+                    <label>
+                        <input type="checkbox" name="Addons" value="Commercial Merchandising (+100%)" id="addMerch" onchange="updateHiddenTotal()"> 
+                        Commercial Merchandising (+100%)
+                    </label>
+                </div>
+            </div>
+
+            <!-- DESCRIPTION BOX -->
+            <div class="form-group">
+                <label for="description">Character Description & Details</label>
+                <textarea id="description" name="Character Description" placeholder="Describe your character, scene, preferred mood, references (links are fine), and any specific details." required></textarea>
+            </div>
+
+            <!-- YOUR EMAIL OR NAME (required) -->
+            <div class="form-group">
+                <label for="contact">Your Email or Your Name *</label>
+                <input type="text" id="contact" name="Contact Info" placeholder="e.g., your@email.com or your name" required>
+                <p class="small-italic" style="margin-top: 4px;">Required — so I can reach you.</p>
+            </div>
+
+            <!-- FILE UPLOAD (optional) -->
+            <div class="form-group">
+                <label for="reference">Picture Reference (optional)</label>
+                <input type="file" id="reference" name="Reference Image" accept="image/*">
+                <p class="small-italic" style="margin-top: 4px;">One image is enough. If not, describe everything in the description box above.</p>
+            </div>
+
+            <!-- PAYMENT NOTE (small, italic) -->
+            <div class="form-group" style="background: #f9f9f9; padding: 15px; border: 1px solid #eee;">
+                <p class="small-italic"><strong>Payment Note:</strong> Payments are currently processed via Wise (Invoicing). If Wise is unavailable, we will arrange an alternative method upon contact.</p>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">Submit Request</button>
+        </form>
+
+        <br>
+        <button class="back-btn" onclick="showPage('home')">&larr; Back to Home</button>
+    </div>
+
+</div>
+
+<!-- LIGHTBOX OVERLAY -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox(event)">
+    <img id="lightboxImg" src="" alt="Zoomed Artwork">
+    <button class="lightbox-close" onclick="closeLightbox(event)">Back to Gallery</button>
+</div>
+
+<!-- VISITOR COUNTER -->
+<div id="visitor-counter">Visits: <span id="visit-count">0</span></div>
+
+<script>
+    // --- PAGE NAVIGATION ---
+    function showPage(pageId) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        document.getElementById(pageId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    // --- SLIDESHOW ---
+    let slideIndex = 0;
+    let slideInterval;
+
+    function showSlides() {
+        let slides = document.querySelectorAll(".slide");
+        if (slides.length === 0) return;
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        slides[slideIndex - 1].classList.add("active");
+    }
+
+    function initSlideshow() {
+        let slides = document.querySelectorAll(".slide");
+        if (slides.length > 0) {
+            slides[0].classList.add("active");
+            slideIndex = 1;
+            slideInterval = setInterval(showSlides, 5000);
+        }
+    }
+
+    // --- LIGHTBOX ---
+    function openLightbox(src) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        lightboxImg.src = src;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox(event) {
+        if (event.target.id === 'lightbox' || event.target.classList.contains('lightbox-close')) {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    // --- NSFW BLUR + ZOOM LOGIC ---
+    function handleNsfwClick(img, event) {
+        event.stopPropagation(); // prevent triggering lightbox from container
+
+        if (!img.classList.contains('unblurred')) {
+            // First click: unblur
+            img.classList.add('unblurred');
+            img.style.filter = 'blur(0px)';
+        } else {
+            // Second click: enlarge via lightbox
+            openLightbox(img.src);
+        }
+    }
+
+    // --- PRICE CALCULATION (hidden from UI, only used for hidden input) ---
+    function updateHiddenTotal() {
+        // Base price
+        const baseTypeSelect = document.getElementById('baseType');
+        const basePrice = parseFloat(baseTypeSelect.options[baseTypeSelect.selectedIndex].getAttribute('data-price'));
+        
+        // Finish multiplier
+        const finishSelect = document.getElementById('finishType');
+        const finishMultiplier = parseFloat(finishSelect.options[finishSelect.selectedIndex].getAttribute('data-price'));
+        
+        // Background multiplier (as decimal)
+        const bgSelect = document.getElementById('bgType');
+        const bgMultiplier = parseFloat(bgSelect.options[bgSelect.selectedIndex].getAttribute('data-price')) / 100;
+        
+        // Add-ons
+        const addChar = document.getElementById('addChar').checked ? 0.5 : 0;
+        const addGore = document.getElementById('addGore').checked ? 0.5 : 0;
+        const addNsfw = document.getElementById('addNsfw').checked ? 0.5 : 0;
+        const addCommercial = document.getElementById('addCommercial').checked ? 0.5 : 0;
+        const addMerch = document.getElementById('addMerch').checked ? 1.0 : 0;
+        const totalAddons = addChar + addGore + addNsfw + addCommercial + addMerch;
+
+        // Calculate: Base * finish + Base * bg% + Base * addons%
+        let finalPrice = basePrice * finishMultiplier;
+        finalPrice += basePrice * bgMultiplier;
+        finalPrice += basePrice * totalAddons;
+
+        // Set hidden input (no visible display)
+        document.getElementById('hiddenTotalPrice').value = finalPrice.toFixed(2);
+    }
+
+    // --- VISITOR COUNTER ---
+    function fetchVisitorCount() {
+        // Using a free API that tracks unique visits per browser session
+        fetch('https://api.counterapi.dev/v1/eryn-portfolio/visits/up')
+            .then(response => response.json())
+            .then(data => {
+                if (data && data.count) {
+                    document.getElementById('visit-count').textContent = data.count;
+                }
+            })
+            .catch(error => {
+                console.log('Visitor counter unavailable:', error);
+                document.getElementById('visit-count').textContent = 'N/A';
+            });
+    }
+
+    // Initialize
+    window.onload = function() {
+        initSlideshow();
+        updateHiddenTotal();
+        fetchVisitorCount();
+    };
+</script>
+
+</body>
+</html>
