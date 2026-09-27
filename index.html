@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERYN - Illustration & Character Art</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        /* --- GLOBAL STYLES --- */
+        :root {
+            --bg-color: #f4f4f4;
+            --card-bg: #ffffff;
+            --text-color: #111;
+            --border-color: #000;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Lato', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            font-family: var(--font-sans);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        /* --- MAIN CONTAINER --- */
+        .container {
+            background-color: var(--card-bg);
+            width: 100%;
+            max-width: 600px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            min-height: 80vh;
+            position: relative;
+        }
+
+        /* --- TYPOGRAPHY --- */
+        h1 {
+            font-family: var(--font-serif);
+            font-size: 3.5rem;
+            text-align: center;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        h2 {
+            font-family: var(--font-serif);
+            font-size: 2.2rem;
+            text-align: center;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        p.subtitle {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* --- SOCIAL ICONS --- */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .social-icons a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            transition: transform 0.2s, opacity 0.2s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .social-icons a:hover {
+            transform: translateY(-3px);
+            opacity: 0.7;
+        }
+
+        /* SVG Icon Styles */
+        .icon-svg {
+            width: 28px;
+            height: 28px;
+            fill: currentColor;
+        }
+
+        /* --- BUTTONS (HOME) --- */
+        .main-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            font-size: 1.1rem;
+            font-family: var(--font-serif);
+            transition: background 0.3s, color 0.3s;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .btn:hover {
+            background-color: var(--border-color);
+            color: #fff;
+        }
+
+        /* --- GALLERY --- */
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fade 2s ease-in-out;
+        }
+
+        @keyframes fade {
+            from { opacity: 0.4; }
+            to { opacity: 1; }
+        }
+
+        .gallery-divider {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 30px 0;
+        }
+
+        /* --- COMMISSION PAGE --- */
+        .commission-text {
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+        }
+
+        .commission-text strong {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+        }
+
+        .commission-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin-bottom: 20px;
+        }
+
+        .commission-list li {
+            margin-bottom: 8px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .commission-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-family: var(--font-serif);
+        }
+
+        .form-group select, 
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            background: #fff;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+
+        .checkbox-group label {
+            font-weight: normal;
+            font-family: var(--font-sans);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            transform: scale(1.2);
+        }
+
+        /* Back Button */
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            text-decoration: none;
+            color: #666;
+            font-size: 0.9rem;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-family: var(--font-sans);
+        }
+
+        .back-btn:hover {
+            color: #000;
+            text-decoration: underline;
+        }
+
+        /* Hide pages by default */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ================= PAGE 1: HOME ================= -->
+    <div id="home" class="page active">
+        <h1>ERYN</h1>
+        <p class="subtitle">Illustrations, Character art,<br>and Cinematic worlds by Eryn.</p>
+
+        <!-- Social Icons -->
+        <div class="social-icons">
+            <!-- Twitter / X -->
+            <a href="https://x.com/eryndor_0" target="_blank" title="Twitter/X">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <!-- TikTok -->
+            <a href="https://www.tiktok.com/@eryndor__0?_r=1&_t=ZS-99rZc0lJjfD" target="_blank" title="TikTok">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+            <!-- Instagram -->
+            <a href="https://www.instagram.com/eryndor_01?stkn=MWxwMDB5NG4zM3BlaA==" target="_blank" title="Instagram">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <!-- Patreon -->
+            <a href="https://www.patreon.com/Eryndor_01?utm_campaign=creatorshare_creator" target="_blank" title="Patreon">
+             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M15.386 3.252c-4.356 0-7.892 3.536-7.892 7.892 0 4.356 3.536 7.892 7.892 7.892 4.356 0 7.892-3.536 7.892-7.892 0-4.356-3.536-7.892-7.892-7.892zm-10.55.748v16h3v-16h-3z"/></svg>
+            </a>
+            <!-- ArtStation -->
+            <a href="https://jannapaypal6.artstation.com/" target="_blank" title="ArtStation">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M2 18.5l2.5-4.3h5.1L7 18.5H2zM21.5 18.5h-6.8l-3.4-5.9 3.4-5.9h6.8l-3.4 5.9 3.4 5.9zM12.5 2L2 20h4.5l6.5-11.2L19.5 20H24L12.5 2z"/></svg>
+            </a>
+            <!-- Facebook -->
+            <a href="https://www.facebook.com/share/1behpyvBWH/" target="_blank" title="Facebook">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <!-- Pixiv (using generic P) -->
+            <a href="https://www.pixiv.net/users/87870114" target="_blank" title="Pixiv">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h-2v-6h2v6zm0-8h-2V7h2v2zm4 8h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg> <!-- Simple placeholder, actual Pixiv logo is complex -->
+            </a>
+            <!-- Tumblr -->
+            <a href="https://www.tumblr.com/eryndor00?source=share" target="_blank" title="Tumblr">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M14.5 2v3.5h3.5v4h-3.5v5.5c0 1.5.5 2 2 2h1.5v4h-3.5c-4 0-6-2-6-6V9.5H5.5v-4H8V2h6.5z"/></svg>
+            </a>
+            <!-- YouTube -->
+            <a href="https://youtube.com/@eryndor_0?si=2BaymauSGDOSluEE" target="_blank" title="YouTube">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+            </a>
+            <!-- Email -->
+            <a href="mailto:eryndorcontact@gmail.com" title="Email">
+                <svg class="icon-svg" viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+        </div>
+
+        <div class="main-buttons">
+            <a href="#" class="btn" onclick="showPage('gallery')">Gallery</a>
+            <a href="#" class="btn" onclick="showPage('commissions')">Commission</a>
+            <a href="mailto:eryndorcontact@gmail.com" class="btn">Email</a>
+        </div>
+    </div>
+
+    <!-- ================= PAGE 2: GALLERY ================= -->
+    <div id="gallery" class="page">
+        <h2>Gallery</h2>
+        <p class="subtitle">Selected character art, illustrations, and concept work.</p>
+        
+        <div class="slideshow-container">
+    <!-- General Artworks -->
+    <div class="slide active">
+        <img src="https://i.imgur.com/KAdJPU9.jpeg" alt="Artwork 1">
+    </div>
+    <div class="slide">
+        <img src="https://i.imgur.com/txwazrh.jpeg" alt="Artwork 2">
+    </div>
+    <div class="slide">
+        <img src="https://i.imgur.com/3b68EGu.jpeg" alt="Artwork 3">
+    </div>
+    <div class="slide">
+        <img src="https://i.imgur.com/pchKrSG.jpeg" alt="Artwork 4">
+    </div>
+    <div class="slide">
+        <img src="https://i.imgur.com/4FVTOJG.jpeg" alt="Artwork 5">
+    </div>
+<div class="slide">
+        <img src="https://i.imgur.com/XZgUREK.jpeg" alt="Artwork 6">
+    </div>
+
+<div class="slide">
+        <img src="https://i.imgur.com/dVTqMBk.jpeg" alt="Artwork 7">
+    </div>
+<div class="slide">
+        <img src="https://i.imgur.com/qT504YP.jpeg" alt="Artwork 8">
+    </div>
+<div class="slide">
+        <img src="https://i.imgur.com/1cYShvb.jpeg" alt="Artwork 9">
+    </div>
+
+<div class="gallery-grid" style="display: flex; flex-direction: column; gap: 30px; margin-top: 20px;">
+    <!-- General Artworks -->
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/KAdJPU9.jpeg" alt="Artwork 1" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/txwazrh.jpeg" alt="Artwork 2" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/3b68EGu.jpeg" alt="Artwork 3" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/pchKrSG.jpeg" alt="Artwork 4" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/dVTqMBk.jpeg" alt="Artwork 5" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+<div class="gallery-item">
+        <img src="https://i.imgur.com/4FVTOJG.jpeg" alt="Artwork 6" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/XZgUREK.jpeg" alt="Artwork 7" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/qT504YP.jpeg" alt="Artwork 8" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/1cYShvb.jpeg" alt="Artwork 9” style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+    <div class="gallery-item">
+        <img src="https://i.imgur.com/d3FdAIp.png" alt="Artwork 10" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+<div class="gallery-item">
+        <img src="https://i.imgur.com/YHyDHoN.jpeg" alt="Artwork A" style="width: 100%; height: auto; border: 1px solid #ddd;">
+    </div>
+
+
+
+    <!-- NSFW Content (Blurred by default, click to unblur) -->
+    <div class="gallery-item">
+        <p style="text-align:center; font-weight:bold; margin-bottom:5px; color:#d9534f;">⚠️ 18+ Slightly Suggestive (Tap to View)</p>
+        <img src="https://i.imgur.com/apOlXA9.jpeg" 
+             alt="NSFW Legoshi 1" 
+             style="width: 100%; height: auto; border: 1px solid #ddd; filter: blur(15px); transition: filter 0.5s; cursor: pointer;" 
+             onclick="this.style.filter='none'">
+    </div>
+    
+    <div class="gallery-item">
+        <p style="text-align:center; font-weight:bold; margin-bottom:5px; color:#d9534f;">⚠️ 18+ Slightly Suggestive (Tap to View)</p>
+        <img src="https://i.imgur.com/zQqoV9e.jpeg" 
+             alt="NSFW Legoshi 2" 
+             style="width: 100%; height: auto; border: 1px solid #ddd; filter: blur(15px); transition: filter 0.5s; cursor: pointer;" 
+             onclick="this.style.filter='none'">
+    </div>
+</div>
+
+
+        
+        <button class="back-btn" onclick="showPage('home')">&larr; Back to Home</button>
+    </div>
+
+    <!-- ================= PAGE 3: COMMISSIONS ================= -->
+    <div id="commissions" class="page">
+        <h2>Commissions</h2>
+        
+        <div class="commission-text">
+            <p>Painterly anime character art, illustration, and project-based artwork. Commissions start at <strong>$150 USD</strong>.</p>
+            <p>Pricing can be sensitive to complexity, character count, background detail, usage, and deadline.</p>
+            
+            <br>
+            <p><strong>What I Offer</strong></p>
+            <ul class="commission-list">
+                <li>Character art</li>
+                <li>Portraits / busts</li>
+                <li>Full-body illustrations</li>
+                <li>Character sheets</li>
+                <li>Promotional or project artwork</li>
+                <li>Dark, surreal, emotional, or cinematic focused pieces</li>
+            </ul>
+
+            <br>
+            <p><strong>Pricing</strong></p>
+            <p>Base price: from $150 USD</p>
+            <p>Larger or more complex work is quoted individually.</p>
+            <p>Commercial use, multiple characters, detailed backgrounds, tight deadlines, or complex designs may increase the price.</p>
+            
+            <br>
+            <p><strong>Process</strong></p>
+            <ol style="padding-left: 20px; margin-bottom: 20px;">
+                <li>Send a request through the form.</li>
+                <li>I review the idea and give a quote.</li>
+                <li>50% Payment is confirmed.</li>
+                <li>I send progress/sketch updates.</li>
+                <li>A Preview of final work is sent.</li>
+                <li>Other 50% Payment is confirmed.</li>
+                <li>Final artwork is delivered as a high-resolution file.</li>
+            </ol>
+
+            <br>
+            <p><strong>Terms Summary</strong></p>
+            <ul class="commission-list">
+                <li>Before requesting, please include clear references, intended usage, budget range, and any deadline.</li>
+                <li>I may decline requests that do not fit my work or comfort zone (Though I have a very broad range).</li>
+                <li>Clear references are required.</li>
+                <li>Commercial use must be discussed upfront.</li>
+                <li>Major revisions after final approval may cost extra.</li>
+                <li>Final artwork may be posted in my portfolio unless privacy is requested.</li>
+                <li>I retain commercial rights unless privately discussed.</li>
+                <li>Timelapse of Artwork needs to be requested prior.</li>
+                <li>If work is urgent and No contact has been made after Request, an Email attempt is recommended.</li>
+            </ul>
+        </div>
+
+        <!-- THE COMMISSION FORM -->
+        <form action="https://formsubmit.co/eryndorcontact@gmail.com" method="POST" id="commissionForm">
+            <!-- FormSubmit Config -->
+            <input type="hidden" name="_subject" value="New Commission Request from Website!">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="https://your-website-url.com/thankyou.html"> <!-- Replace with a thank you page URL or remove to redirect to home -->
+
+            <h3 style="font-family: var(--font-serif); margin-bottom: 15px;">Request Form</h3>
+
+            <!-- Base Pricing Options -->
+            <div class="form-group">
+                <label>Base Type</label>
+                <select name="Base Type" required>
+                    <option value="">Select a base...</option>
+                    <option value="Bust Up">Bust Up</option>
+                    <option value="Half Body">Half Body</option>
+                    <option value="Full Body">Full Body</option>
+                </select>
+            </div>
+
+            <!-- Style -->
+            <div class="form-group">
+                <label>Style</label>
+                <select name="Style" required>
+                    <option value="">Select a style...</option>
+                    <option value="Anime">Anime</option>
+                    <option value="Furry">Furry</option>
+                </select>
+            </div>
+
+            <!-- Add Ons (Checkboxes) -->
+            <div class="form-group">
+                <label>Add-ons (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="Addons" value="Extra Character (+50%)"> Extra Character (+50%)</label>
+                    <label><input type="checkbox" name="Addons" value="Complex Background (+10%)"> Complex Background (+10%)</label>
+                    <label><input type="checkbox" name="Addons" value="Simple Background (+5%)"> Simple Background (+5%)</label>
+                    <label><input type="checkbox" name="Addons" value="Redo Whole Sketch (+10%)"> Redo Whole Sketch (+10%)</label>
+                </div>
+            </div>
+
+            <!-- Content Do's -->
+            <div class="form-group">
+                <label>Content (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" name="Content" value="Ships/Couple"> Ships/Couple</label>
+                    <label><input type="checkbox" name="Content" value="OC"> OC</label>
+                    <label><input type="checkbox" name="Content" value="Fanart"> Fanart</label>
+                    <label><input type="checkbox" name="Content" value="Furry"> Furry</label>
+                    <label><input type="checkbox" name="Content" value="GL/BL"> GL/BL</label>
+                    <label><input type="checkbox" name="Content" value="NSFW"> NSFW</label>
+                    <label><input type="checkbox" name="Content" value="Gore"> Gore</label>
+                </div>
+            </div>
+
+            <!-- Mood, Tone, Personality, References, Description -->
+            <div class="form-group">
+                <label for="mood">Mood & Tone</label>
+                <input type="text" id="mood" name="Mood & Tone" placeholder="e.g., Dark, Cinematic, Joyful" required>
+            </div>
+
+            <div class="form-group">
+                <label for="personality">Character Personality</label>
+                <input type="text" id="personality" name="Character Personality" placeholder="e.g., Stoic, Energetic, Shy" required>
+            </div>
+
+            <div class="form-group">
+                <label for="references">References (Links)</label>
+                <textarea id="references" name="References" placeholder="Paste links to Google Drive, Pinterest, or image URLs here." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="description">Character Description & Details</label>
+                <textarea id="description" name="Character Description" placeholder="Describe your character, scene, and any specific details." required></textarea>
+            </div>
+
+            <!-- Payment Note -->
+            <div class="form-group" style="background: #f9f9f9; padding: 15px; border: 1px solid #eee;">
+                <p><strong>Payment Note:</strong> Payments are currently processed via PayPal (Invoicing). If PayPal is unavailable, we will arrange an alternative method upon contact.</p>
+            </div>
+
+            <button type="submit" class="btn" style="width: 100%;">Submit</button>
+        </form>
+
+        <br>
+        <button class="back-btn" onclick="showPage('home')">&larr; Back to Home</button>
+    </div>
+
+</div>
+
+<script>
+    // --- PAGE NAVIGATION LOGIC ---
+    function showPage(pageId) {
+        // Hide all pages
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        // Show the selected page
+        document.getElementById(pageId).classList.add('active');
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
+    // --- SLIDESHOW LOGIC ---
+    let slideIndex = 0;
+    let slideInterval;
+
+    function showSlides() {
+        let slides = document.querySelectorAll(".slide");
+        if (slides.length === 0) return;
+        
+        // Hide all slides
+        for (let i = 0; i < slides.length; i++) {
+            slides[i].classList.remove("active");
+        }
+        
+        slideIndex++;
+        if (slideIndex > slides.length) { slideIndex = 1 }
+        
+        // Show the current slide
+        slides[slideIndex - 1].classList.add("active");
+    }
+
+    // Initialize slideshow
+    function initSlideshow() {
+        let slides = document.querySelectorAll(".slide");
+        if (slides.length > 0) {
+            slides[0].classList.add("active");
+            slideIndex = 1;
+            // Change image every 6 seconds (slow)
+            slideInterval = setInterval(showSlides, 6000);
+        }
+    }
+
+    // Initialize on load
+    window.onload = initSlideshow;
+
+    // Handle form submission (optional: prevent double submission)
+    document.getElementById('commissionForm').addEventListener('submit', function(e) {
+        // You can add a loading spinner here if you want
+        // alert("Submitting form..."); 
+    });
+</script>
+
+</body>
+</html>
